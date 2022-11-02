@@ -9084,16 +9084,11 @@ function getCardNumbers(message) {
   console.log(`getCardNumber(${message})`);
   console.log(`Trello ID match pattern ${trelloCardIdPattern}`)
   let ids = message && message.length > 0 ? message.replace(regexPullRequest, "").match(new RegExp(`${trelloCardIdPattern}\\d+`, 'g')) : [];
-  if (ids && ids.length > 0) {
-    values = ids.map((x) => x.replace(trelloCardIdPattern, ''));
-    console.log("Card numbers are ", values);
-    return values;
-  }
-  return null;
+  return ids && ids.length > 0 ? ids[ids.length-1].replace(trelloCardIdPattern, '') : null;
 }
 
 function getAllCardNumbers(message, branch) {
-  // cardBranch = getCardNumbers(branch);
+  cardBranch = getCardNumbers(branch);
   cardMessage = getCardNumbers(message);
   return new Set(...cardBranch, ...cardMessage);
 }
