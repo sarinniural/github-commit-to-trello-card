@@ -9085,7 +9085,6 @@ function getCardNumbers(message) {
   console.log(`Trello ID match pattern ${trelloCardIdPattern}`)
   let ids = message && message.length > 0 ? message.replace(regexPullRequest, "").match(new RegExp(`${trelloCardIdPattern}\\d+`, 'g')) : [];
   value = ids && ids.length > 0 ? [...new Set(ids.map((x) => {return x.replace(trelloCardIdPattern, '');}))] : null;
-  console.log("Value is ", value);
   return value;
 }
 
