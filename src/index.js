@@ -6,7 +6,7 @@ const { context = {} } = github;
 const { pull_request, head_commit } = context.payload;
 
 const regexPullRequest = /Merge pull request \#\d+ from/g;
-const trelloCardIdPattern = _actions_core__WEBPACK_IMPORTED_MODULE_1__.getInput('trello-card-id-pattern', { required: false }) || '#';
+const trelloCardIdPattern = core.getInput('trello-card-id-pattern', { required: false }) || '#';
 const trelloApiKey = core.getInput('trello-api-key', { required: true });
 const trelloAuthToken = core.getInput('trello-auth-token', { required: true });
 const trelloBoardId = core.getInput('trello-board-id', { required: true });
