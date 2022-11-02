@@ -1,7 +1,6 @@
 import * as axios from 'axios';
 import * as core from '@actions/core';
 import * as github from '@actions/github';
-import 
 
 const { context = {} } = github;
 const { pull_request, head_commit } = context.payload;
