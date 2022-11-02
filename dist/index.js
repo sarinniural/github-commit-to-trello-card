@@ -9082,8 +9082,11 @@ const trelloListNamePullRequestClosed = _actions_core__WEBPACK_IMPORTED_MODULE_1
 
 function getCardNumbers(message) {
   console.log(`getCardNumber(${message})`);
+  console.log(`Trello ID match pattern ${trelloCardIdPattern}`)
   let ids = message && message.length > 0 ? message.replace(regexPullRequest, "").match(new RegExp(`${trelloCardIdPattern}\\d+`, 'g')) : [];
-  return ids && ids.length > 0 ? [...new Set(ids.map((x) => {return x.replace(trelloCardIdPattern, '');}))] : null;
+  value = ids && ids.length > 0 ? [...new Set(ids.map((x) => {return x.replace(trelloCardIdPattern, '');}))] : null;
+  console.log("Value is ", value);
+  return value;
 }
 
 function getAllCardNumbers(message, branch) {
@@ -9095,7 +9098,8 @@ function getAllCardNumbers(message, branch) {
 async function getCardOnBoard(board, card) {
   console.log(`getCardOnBoard(${board}, ${card})`);
   if (card && card.length > 0) {
-    let url = `https://trello.com/1/boards/${board}/cards/${card}`
+    let url = `https://trello.com/1/boards/${board}/cards/${card}`;
+    console.log("Url is ", url);
     return await axios__WEBPACK_IMPORTED_MODULE_0__.get(url, { 
       params: { 
         key: trelloApiKey, 
