@@ -1,6 +1,7 @@
 import * as axios from 'axios';
 import * as core from '@actions/core';
 import * as github from '@actions/github';
+import 
 
 const { context = {} } = github;
 const { pull_request, head_commit } = context.payload;
@@ -19,10 +20,12 @@ function getCardNumbers(message) {
   console.log(`getCardNumber(${message})`);
   console.log(`Trello ID match pattern ${trelloCardIdPattern}`)
   let ids = message && message.length > 0 ? message.replace(regexPullRequest, "").match(new RegExp(`${trelloCardIdPattern}\\d+`, 'g')) : [];
-  // this line does not work when Node16 is specified in action.yml
-  value = ids && ids.length > 0 ? [...new Set(ids.map((x) => {return x.replace(trelloCardIdPattern, '');}))] : null;
-  // value = ["291"]
-  return value;
+  if (ids && ids.length > 0) {
+    values = ids.map((x) => x.replace(trelloCardIdPattern, ''));
+    console.log("Card numbers are ", values);
+    return values;
+  }
+  return null;
 }
 
 function getAllCardNumbers(message, branch) {
